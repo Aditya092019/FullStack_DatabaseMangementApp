@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Create Table</title>
+
+        
+</head>
+
+<body>
+<div class="column">
+    <button class="button" onclick="createModal()">
+        Create New Table
+    </button>
+</div>
+<div class="container">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>Create Table</h2>
+            <span class="close" onclick="closeModal()">×</span>
+        </div>
+        <label>Table name</label>
+        <input
+            type="text"
+            id="tableName"
+            class="table-name"
+            placeholder="users"
+        >
+        <div class="field-heading">
+            <label>Field names</label>
+            <label>Type</label>
+        </div>
+        <div id="fieldsContainer">
+            <div class="field-row">
+                <input
+                    type="text"
+                    class="field-name"
+                    placeholder="Field Name"
+                >
+                <select class="field-type">
+                    <option value="STRING">STRING</option>
+                    <option value="INTEGER">INTEGER</option>
+                    <option value="BOOLEAN">BOOLEAN</option>
+                    <option value="DATE">DATE</option>
+                    <option value="FLOAT">FLOAT</option>
+                </select>
+            </div>
+        </div>
+        <span
+            class="add-field"
+            onclick="addField()"
+        >
+            Add another field
+        </span>
+        <br>
+        <button
+            class="create-btn"
+            onclick="createTable()"
+        >
+            Create Table
+        </button>
+    </div>
+</div>
+
+<script src="index.js"></script>
+
+</body>
+</html>
