@@ -1,13 +1,11 @@
+let requestData =
+    JSON.parse(localStorage.getItem("requestData")) || null;
 function addField() {
-
     const container = document.getElementById("fieldsContainer");
-
     const row = document.createElement("div");
-
     row.className = "field-row";
 
     row.innerHTML = `
-        
         <input
             type="text"
             class="field-name"
@@ -15,23 +13,19 @@ function addField() {
         >
 
         <select class="field-type">
-
             <option value="STRING">STRING</option>
             <option value="INTEGER">INTEGER</option>
             <option value="BOOLEAN">BOOLEAN</option>
             <option value="DATE">DATE</option>
             <option value="FLOAT">FLOAT</option>
-
         </select>
 
     `;
-
     container.appendChild(row);
 }
 
 
 function createTable() {
-
     const tableName =
         document.getElementById("tableName").value;
 
@@ -46,55 +40,50 @@ function createTable() {
 
 
     for (let i = 0; i < fieldNames.length; i++) {
-
         const name = fieldNames[i].value;
         const type = fieldTypes[i].value;
-
         if (name.trim() !== "") {
-
             fields[name] = type;
-
         }
     }
 
 
-    const requestData = {
-
+    requestData = {
         tableName: tableName,
-
         fields: fields
-
     };
 
-
+    localStorage.setItem(
+        "requestData",
+        JSON.stringify(requestData)
+    );
     console.log(requestData);
 
 
     fetch("http://localhost:3000/table", {
-
         method: "POST",
-
         headers: {
             "Content-Type": "application/json"
         },
-
         body: JSON.stringify(requestData)
-
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Failed to create table");
+        }
+        return response.json();
+    })
     .then(data => {
-
         console.log(data);
-
         alert("Table created successfully!");
-
+        document.querySelector(".container").style.display = "none";
+        addTableName();
     })
     .catch(error => {
-
-        console.error(error);
-
+        console.error("Error:", error);
     });
 
+   
 }
 
 

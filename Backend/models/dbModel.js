@@ -1,8 +1,9 @@
 const sequelize = require('../utils/db-connection');
-const {DataTypes} = require('sequelize');
+const { DataTypes } = require('sequelize');
 
 
-const createDynamicModel = (fieldName, fields) => {
+const createDynamicModel = (tableName, fields) => {
+
     const attributes = {
         id: {
             type: DataTypes.INTEGER,
@@ -12,21 +13,32 @@ const createDynamicModel = (fieldName, fields) => {
         }
     };
 
+
     for (const fieldName in fields) {
+
         const fieldType = fields[fieldName];
+
         if (!DataTypes[fieldType]) {
             throw new Error(`Invalid datatype: ${fieldType}`);
         }
+
         attributes[fieldName] = {
             type: DataTypes[fieldType],
-            allowNull: true
+            allowNull: false
         };
     }
-    return sequelize.define(fieldName, attributes);
+
+
+    return sequelize.define(
+        tableName,
+        attributes,
+        {
+            tableName: tableName,
+            freezeTableName: true,
+            timestamps: true
+        }
+    );
 };
 
 
-
-
 module.exports = createDynamicModel;
-

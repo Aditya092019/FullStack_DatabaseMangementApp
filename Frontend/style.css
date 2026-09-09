@@ -24,16 +24,28 @@ body {
     background: rgba(0, 0, 0, 0.4);
 }
 
+.row{
+    display:flex;
+    flex-direction: row;
+}
 
 .column {
     padding: 20px;
+    height:925px;
+    width:300px;
+    border:2px solid gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.column button {
+#create-btn-table {
     padding: 12px 20px;
     font-size: 16px;
     cursor: pointer;
     background-color: #ff7900;
+    margin-bottom: 30px;
+    color:white;
 }
 .modal {
     width: 650px;

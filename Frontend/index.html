@@ -4,16 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="record.css">
     <title>Create Table</title>
 
         
 </head>
 
 <body>
+<div class="row">    
 <div class="column">
-    <button class="button" onclick="createModal()">
-        Create New Table
+    <div class="tableName-bold"></div>
+    <button class="button" id="create-btn-table" onclick="createModal()">
+       + Create New Table
     </button>
+</div>
+<div class="recordsContainer">
+    <table id="recordsTable">
+        <thead id="recordsHead">
+        </thead>
+        <tbody id="recordsBody">
+        </tbody>
+    </table>
+</div>
 </div>
 <div class="container">
     <div class="modal">
@@ -61,10 +73,29 @@
         >
             Create Table
         </button>
+    </div> 
+</div>
+
+
+<div class="insertContainer">
+    <div class="insertModal">
+         <div class="insertModal-header">
+            <h3>Add record</h3>
+            <span class="insertClose" onclick="closeInsertModal()">×</span>
+         </div>
+         <div id="insertFieldsContainer"></div>
+        <button
+            class="insertModal-bottom"
+            type="button"
+            onclick="insertRecord()"
+        >
+            Add record
+        </button>
     </div>
 </div>
 
 <script src="index.js"></script>
+<script src="table.js"></script>
 
 </body>
 </html>
